@@ -25,8 +25,8 @@ if name == 'Durga':
     print("hello %s ! How are you" %name)
 else:
     print('Hello %s have a nice day' %name)
-'''
-'''
+
+    
 brand = input('Enter your favourite brand:')
 if brand == 'RC':
     print('It is for newbies')
@@ -36,8 +36,9 @@ elif brand == 'Gin':
     print("holla! chhers buddy")
 else:
     print('Please drink good brands')
-'''
-'''
+
+    
+
 num1,num2,num3 = [eval(x) for x in input("enter three numbers: ").split()]
 if(num1>num2 and num1>num3):
     print('The biggest number is: ' ,num1)
@@ -45,15 +46,15 @@ elif(num2>num3):
     print('The biggest number is: ' ,num2)
 else:
     print("The biggest number is: " ,num3)
-'''
-'''
+
+    
 num = eval(input("enter a number:"))
 if (num>=1 and num<=100):
     print('the number',num, 'is between  1 and 100')
 else:
     print('the number',num, 'is not between  1 and 100' )
-'''
-'''
+
+    
 digit = int(input('enter a digit betwenn 1 and 10:'))
 if(digit == 1):
     print('ONE')
@@ -82,28 +83,27 @@ else:
 s = "Sunny Leone the Bitch"
 for x in s:
     print(x)
-'''
-'''
+
+    
 list1 = [1,2,3,4,5,90]
 for x in list1:
     print(x)
-'''
-'''
+
+    
 s = "Sunny Leone the Bitch"
 count = 0
 for x in s:
     count+= 1
 print('The number of characters in the string is',count)
-'''
 
-'''
+
 s = input('enter a string:')
 i =0
 for x in s:
     print('The character at ',i,'index is ',x)
     i += 1
-'''
-'''
+
+    
 for x in range(3):
     print('Hello')
 
@@ -122,8 +122,8 @@ for x in range(1,21,2):
 
 for x in range(10,0,-1):
     print(x)
-'''
-'''
+
+    
 list2 = eval(input('Enter a list:'))
 sum = 0
 for x in list2:
@@ -137,26 +137,25 @@ x = 1
 while (x<=10):
     print(x)
     x += 1
-'''
 
-'''
+    
 x = 0
 sum=0
 while(x<=100):
     sum += x
     x += 1
 print('The sum of first 100 numbers is :',sum)
-'''
-'''
+
+
 name = ''
 pwd = ''
 while(name != 'Durga' or pwd !='python'):  ## we have used 'or' means if one condition fails it woll not work
     name = input('Enter a name:')
     pwd = input('Enter password ')
 print('Hello Durga! thanks for conformation')
-'''
 
-'''
+
+
 for i in range(4):
     for j in range(4):
         print('i = %d and j = %d' %(i,j))
@@ -169,8 +168,8 @@ for i in range(1,n+1):
     for j in range(1,i+1):
         print('*',end=" ")
     print()
-'''
-'''   
+
+       
 n = int(input('Enter number of rows:'))
 for i in range(n):
     print('* '*n)
@@ -335,6 +334,7 @@ while i>=0:
 print(output)
 
 """Program to reverse each content of each word of string"""
+
 s = input('Enetr a string')
 l = s.split()
 i = len(l)-1
@@ -354,6 +354,7 @@ print(result)
 
 
 """WAP to print characters present at odd and even position for the given string"""
+
 s = input('Enter a string:')
 print('The characters at even positions are:',s[::2])
 print('The characters at odd positions are:',s[1::2])
@@ -431,6 +432,7 @@ print(output)
 
 
 """WAP to remove duplicate elements from the string"""
+
 s = input('Enter a string:')
 l = []
 for x in s:
@@ -442,6 +444,7 @@ print(result)
 
 
 """WAP to count the number of occurences of characters in a string"""
+
 s = input('Enter a string here:')
 dict1 = {}
 
@@ -531,6 +534,7 @@ print(l)
 
 
 """WAP to display unique vowels present in the given word"""
+
 vowels = ['a','e','i','o','u','A','E','I','O','U']
 word = input('Enter a word:')
 found = []
