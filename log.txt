@@ -1,0 +1,27 @@
+WARNING:root:warning message
+ERROR:root:error message
+CRITICAL:root:critical message
+DEBUG:root:Debug message
+INFO:root:info message
+WARNING:root:warning message
+ERROR:root:error message
+CRITICAL:root:critical message
+INFO:root:A new request came.
+INFO:root:A new request came.
+INFO:root:request processing completed!!
+INFO:root:A new request came.
+ERROR:root:division by zero
+Traceback (most recent call last):
+  File "c:\Users\Subham Lohan\OneDrive\Desktop\python\Advanced.py", line 172, in <module>
+    print('x/y = ',x/y)
+                   ~^~
+ZeroDivisionError: division by zero
+INFO:root:request processing completed!!
+INFO:root:A new request came.
+ERROR:root:invalid literal for int() with base 10: 'tenn'
+Traceback (most recent call last):
+  File "c:\Users\Subham Lohan\OneDrive\Desktop\python\Advanced.py", line 171, in <module>
+    y = int(input("enter second number :"))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'tenn'
+INFO:root:request processing completed!!
