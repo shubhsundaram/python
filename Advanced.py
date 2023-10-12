@@ -869,7 +869,393 @@ h.brain.think()
 
 
 # Garbage Collector
+"""
+import gc
+print(gc.isenabled())
+gc.disable()
+print(gc.isenabled())
+gc.enable()
+print(gc.isenabled())
+"""
+
+# # # #   POLYMORPHISM in python   # # # #
+"""
+class Car:
+    def __init__(self,name,model,color):
+        self.name = name
+        self.model = model
+        self.color = color
+    def getinfo(self):
+        print("{}, Model {} and color {} ".format(self.name,self.model,self.color))
+
+class Employee:
+    def __init__(self,ename,number,Car):
+        self.ename = ename
+        self.number = number
+        self.Car = Car
+    def empinfo(self):
+        print('Employee Name ',self.ename)
+        print('Employee Number ',self.number)
+        print('Employee Car details :')
+        self.Car.getinfo()
+
+c = Car('Jaguar','F-Type','Indus Silver')
+e = Employee('Subham Lohan',101,c)
+e.empinfo()
+"""
+
+# Inheritance
+##### the properties of parent class can be copied to child class.
+"""
+class X:
+    a = 10
+    def m1(self):
+        print('Parent class instance method.')
+    @classmethod
+    def m2(cls):
+        print('Parent class Class Method.')
+    @staticmethod
+    def m3():
+        print('Parent class static Method.')
+    def __init__(self):
+        self.b = 8.90
+        print("Parent Constructor...!")
+    def __del__(self):
+        print('Parent Destructor..!')
+class Y(X):
+    a = 78
+    def __init__(self):
+        print('Child Constructor..!')
+    def __del__(self):
+        print('Child Desstructor..!')
+
+y = Y()
+print(y.a)
+y.m1()
+y.m2()
+y.m3()
+
+
+class X:
+    a = 10
+    def m1(self):
+        print('Parent class instance method.')
+    @classmethod
+    def m2(cls):
+        print('Parent class Class Method.')
+    @staticmethod
+    def m3():
+        print('Parent class static Method.')
+    def __init__(self):
+        self.b = 8.90
+        print("Parent Constructor...!")
+    
+class Y(X):
+    def __init__(self):
+        super().__init__()     # super() method is used to acess parent methods and variables.
+        super().m1()
+        super().m2()
+        super().m3()
+        print(super().a)
+        print('Child Constructor..!')
+    
+y = Y()
+
+
+class Person:
+    def __init__(self,name,age):
+        self.age = age
+        self.name = name
+    def eatndrink(self):
+        print('Eat Biryani and drink Beer.')
+
+class SE(Person):
+    def __init__(self,name,age,eno,esal):
+        super().__init__(name,age)
+        self.eno =eno
+        self.esal = esal
+    def work(self):
+        print('Coding is like drinking a chilled beer.')
+
+s = SE('Subham Lohan',26,102,15000)
+print(s.name,s.age,s.eno,s.esal)
+s.eatndrink()
+s.work()
+
+
+class P:
+    x = 999
+    def __init__(self):
+        self.x = 10
+class C(P):                        # super() method can only get class variable but not instance variable
+    def __init__(self):            # to get instance variable of parent class into child class we need to use 'self' keyword
+        super().__init__()
+        self.y = 20
+        print(super().x)
+        print(self.x)
+        print(self.__dict__)
+
+c = C()
+
+
+class P:
+    def __init__(self):
+        self.b = 10
+    def m1(self):
+        self.b = 123
+class C(P):
+    def __init__(self):
+        self.b  = 20
+        print('Before : ',self.b)
+        super().__init__()
+        print('After : ',self.b)
+        super().m1()
+        print(self.b)
+
+c = C()
+
+
+# multilevel Inheritance
+class GF:
+    def m1(self):
+        print('Land')
+class F(GF):
+    def m2(self):
+        print("Cash")
+class U(F):
+    def m3(self):
+        print("Enjoy")
+
+c = U()
+c.m1()
+c.m2()
+c.m3()
+
+
+# Hierarchial Inheritance
+
+class P:
+    def m1(self):
+        print('I am Parent')
+class C1(P):
+    def m2(self):
+        print('I am first child')
+class C2(P):
+    def m3(self):
+        print('I am second child')
+
+c1 = C1()
+c1.m1()
+c1.m2()
+
+c2 = C2()
+c2.m1()
+c2.m3()
+ 
+
+class Father:
+    def height(self):
+        print('Height is 6 feet')
+class Mother:
+    def color(self):
+        print('brown color')
+class Child(Father,Mother):
+    print('Child inherited properties from parents are : ')
+
+c = Child()
+c.height()
+c.color()
+
+
+class P1:
+    def m1(self):
+        print('P1 method')
+class P2:
+    def m1(self):
+        print('P2 method')
+class C(P2,P1):
+    pass
+
+c = C()
+c.m1()             # the method call will be according to order of the classes.
+"""
+
+# POLYMORPHISM -------------------->>
+"""
+class Duck:
+    def talk(self):
+        print('Quack...Quack..Quacl..!!')
+class Dog:
+    def bark(self):
+        print('Bow  Bow Bow..!!')
+class Cat:
+    def talk(self):
+        print('Meow  Meow Meow..!!')
+class Goat:
+    def talk(self):
+        print('Myahh  Myahh Myahh..!!')
+
+l = [Duck(),Dog(),Cat(),Goat()]
+for obj in l:
+    if hasattr(obj,'talk'):
+        obj.talk()
+    else:
+        obj.bark()
+"""
+
+
+# Operator  Overloading ----------------->>
+""" same operator having multiple use cases."""
+
+class Book:
+    def __init__(self,pages):
+        self.pages = pages
+    def __add__(self,other):
+        return self.pages + other.pages
+b1 = Book(100)
+b2 = Book(300)
+print('The number of total pages = ',b1+b2)
 
 
 
+
+
+
+
+
+
+ # REGULAR EXPRESSIONS in python
+
+"""
+import re
+
+count = 0
+pattern = re.compile('ab')
+matcher  = pattern.finditer('abaababaabab')
+for m in matcher:
+    count += 1
+    print('start : {} ,end : {} , group : {}'.format(m.start(),m.end(),m.group()))
+print('The number of occurences are :',count)
+
+
+'''Alternative to the above code'''
+import re
+count = 0
+matcher  = re.finditer('ab','abaababaabab')
+for m in matcher:
+    count += 1
+    print('start : {} ,end : {} , group : {}'.format(m.start(),m.end(),m.group()))
+print('The number of occurences are :',count)
+
+
+import re
+matcher = re.finditer('[abc]','a7b@k9zlohana')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[^abc]','a7b@k9zlohana')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[a-z]','a7b@k9zlohana')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[A-Z]','a7b@k9zlohana')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[a-zA-Z0-9]','a7b@k9zlohana')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[^a-zA-Z0-9]','a7b@k9zlohana')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[\w]','a7b @k9z lohan a')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[\W]','a7b @k9z lohan a')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+print()
+
+matcher = re.finditer('[.]','a7b @k9z lohan a')
+for m in matcher:
+    print(m.start(),'-------',m.group())
+
+
+import re
+s = input('Enter pattern to check : ')
+m = re.match(s,'abcdefghijkl')
+if m!= None:
+    print('Match is available at the beginning of the string.')
+    print('Start : {} and end : {}'.format(m.start(),m.end()))
+else:
+    print('Match is not available at the beginning of the string.')
+
+
+import re
+s = input('Enter pattern to check : ')
+m = re.fullmatch(s,'abcdefghijkl')
+if m!= None:
+    print('Full string is matched.')
+else:
+    print('Full string is not matched.')
+
+
+
+import re
+s = input('Enter pattern to check : ')
+m = re.search(s,'abcdefabghijkl')
+if m!= None:
+    print('Match is available.')
+    print('first occurence with start index : {} and end index : {}'.format(m.start(),m.end()))
+else:
+    print('Full string is not matched.')
+
+
+import re
+m = re.findall('[0-9]','a7b9k6z23bg6')
+print(m)
+
+s = re.sub('\d','#','a7bdc8h3j56')
+print(s)
+
+l = re.split('\.','www.durgasoftwares.com.in')
+for x in l:
+    print(x)
+
+s = 'Learning python is very easy dude..!!'
+res = re.search('^learning',s,re.IGNORECASE)
+if res!= None:
+    print('target string starts with learning')
+else:
+    print('target string does not starts with learning')
+
+
+s = 'Learning python is very easy dude'
+res = re.search('dude$',s)
+if res!= None:
+    print('target string ends with dude')
+else:
+    print('target string does not ends with dude')
+"""
 
