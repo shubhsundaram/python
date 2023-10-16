@@ -1106,7 +1106,7 @@ for obj in l:
 
 # Operator  Overloading ----------------->>
 """ same operator having multiple use cases."""
-
+"""
 class Book:
     def __init__(self,pages):
         self.pages = pages
@@ -1123,10 +1123,227 @@ print('b1<b2 : ',b1<b2)
 print('b1>=b2 : ',b1>=b2)
 
 
+class employee:
+    def __init__(self,name,salary):
+        self.name = name
+        self.salary = salary
+    def __mul__(self,other):
+        return self.salary*other.days
+class Timesheet:
+        def __init__(self,name,days):
+            self.name = name
+            self.days = days
+
+e = employee('Subham',10000)
+t = Timesheet('Subham',29)
+print('This month salary : ',e*t)
+"""
+
+# Method Overloading ---------------------->>
+
+"""python does not support method overloading but it will consider the last method
+if there would be more than one similar methods available."""
+"""
+class test:
+    def sum(self,*n):
+        total = 0
+        for n1 in n:
+            total += n1
+        print('The sum is :',total)
+t = test()
+t.sum(10,20,30,4)
+"""
+
+# Constructor Overloading ------------------>>
+
+"""python does not support constructor overloading but it will consider the last contructor
+if there would be more than one similar constructors available."""
+"""
+class Test:
+    def __init__(self):
+        print('No Arg Constructor..!!')
+    def __init__(self,a):
+        print('One Arg Constructor..!!')
+    def __init__(self,a,b):
+        print('Two Arg Constructor..!!')
+t =Test(10,20)
+"""
+
+# Method Overriding ------------------------>>
+"""
+class P:
+    def property(self):
+        print("Parents : you have our Cash,Land,gold and Power")
+    def marriage(self):
+        print('You have to marry Aapalma')
+class C(P):
+    def marriage(self):
+        super().marriage()
+        print('Child : Father! I want to marry Katrina Kaif.')
+c = C()
+c.property()
+c.marriage()
+"""
+
+
+# ABSTRACTION in python.
+
+"""
+from abc import *
+class Vehicle(ABC):
+    @abstractmethod
+    def getNoOfWheels(self):
+        pass
+class Bus(Vehicle):
+    def getNoOfWheels(self):
+        return 7
+class Auto(Vehicle):
+    def getNoOfWheels(self):
+        return 3
+b = Bus()
+print('Number of wheels in Bus : ',b.getNoOfWheels())
+a = Auto()
+print('Number of wheels in auto : ',a.getNoOfWheels())
+"""
+
+# Interface vs Abstract class vs Concrete class --------------->>
+"""
+from abc import *
+class CollegeAutomation(ABC):
+    @abstractmethod
+    def m1(self): pass
+    @abstractmethod
+    def m2(self): pass
+    @abstractmethod
+    def m3(self): pass   
+'''The first class is nothing but Interface.'''
+class ImplCls(CollegeAutomation):
+    def m1(self):
+        print('m1 method implementation..!')
+    def m2(self):
+        print('m2 method implementation..!')
+'''The first and second class collectively called Abstract Class 
+because all the methods get not implemented successfully.'''
+class ConcreteCls(ImplCls):
+    def m3(self):
+        print('m3 method implementation..!')
+c = ConcreteCls()
+c.m1()
+c.m2()
+c.m3()
+'''The third class i.e Concrete class completes the implementation of  all the methods.'''
+
+
+from abc import *
+class DBInterface(ABC):
+    @abstractmethod
+    def connect(self):
+        pass
+    @abstractmethod
+    def disconnect(self):
+        pass
+
+class Oracle(DBInterface):
+    def connect(self):
+        print('Connecting to Oracle database..!')
+    def disconnect(self):
+        print('Disconnecting from Oracle database..!')
+class MySql(DBInterface):
+    def connect(self):
+        print('Connecting to MySql database..!')
+    def disconnect(self):
+        print('Disconnecting from MySql database..!')
+class Sybase(DBInterface):
+    def connect(self):
+        print('Connecting to Sybase database..!')
+    def disconnect(self):
+        print('Disconnecting from Sybase database..!')
+
+dbname = input('Enter Database Name : ')
+classname = globals()[dbname]    # globals() is used to convert string to class.
+x = classname()
+x.connect()
+x.disconnect()
 
 
 
+from abc import *
+class Printer(ABC):
+    @abstractmethod
+    def print(self,text):
+        pass
+    @abstractmethod
+    def disconnect(self):
+        pass
 
+class EPSON(Printer):
+    def printit(self,text):
+        print('printing from EPSON printer....')
+        print(text)
+    def disconnect(self):
+        print('Disconnecting to EPSON printer...')
+
+class HP(Printer):
+    def printit(self,text):
+        print('printing from HP printer....')
+        print(text)
+    def disconnect(self):
+        print('Disconnecting to HP printer...')
+
+with open('config.txt','r') as f:
+    pname = f.readline()
+classname = globals()[pname]
+x = classname()
+x.printit("This is data to print...")
+x.disconnect()
+"""
+
+# Private Variable -------------------------------->>
+"""The war to call a private variable in python."""
+"""
+class test:
+    def __init__(self):
+        self.__x = 10
+t = test()
+print(t._test__x)
+"""
+""" Lets's have an example"""
+"""
+class Account:
+    def __init__(self,name,balance,min_balance):
+        self.name = name
+        self.balance = balance
+        self.min_balance = min_balance
+    def deposit(self,amount):
+        self.balance += amount
+    def withdraw(self,amount):
+        if self.balance-amount >= self.min_balance:
+            self.balance -= amount
+        else:
+            print("Sorry, insufficient Funds..!")
+    def printStatement(self):
+        print("Account Balance : ",self.balance)
+
+class current(Account):
+    def __init__(self,name,balance):
+        super().__init__(name,balance,min_balance=-1000)
+    def __str__(self):
+        return "{}'s Current account with Balance : {}".format(self.name,self.balance)
+class Savings(Account):
+    def __init__(self,name,balance):
+        super().__init__(name,balance,min_balance= 0)
+    def __str__(self):
+        return "{}'s Savings account with Balance : {}".format(self.name,self.balance)
+
+c = Savings('Subham Lohan',10000)
+print(c)
+c.deposit(25000)
+print(c)
+c.withdraw(25000)
+print(c)
+c.printStatement()
+c.withdraw(7000)
+"""
 
 
  # REGULAR EXPRESSIONS in python
@@ -1263,4 +1480,128 @@ if res!= None:
 else:
     print('target string does not ends with dude')
 """
+
+
+# MULTI-THREADING in python
+
+"""
+import threading
+print("current executing thread : ",threading.current_thread().getName())
+"""
+# 1.) creating a thread without using any class.
+"""
+from threading import *
+def display():
+    print('This code is executed by thread : ',current_thread().getName())
+t = Thread(target=display)  # Mainthread creates child thread object.
+t.start() # Main thread starts childthread.
+"""
+"""
+from threading import *
+def display():
+    for i in range(5):
+        print('Child-Thread')
+t = Thread(target=display())
+t.start()     # Child-thread
+
+for i in range(5):  # Main-thread
+    print('Main-Thread')
+"""
+
+# 2.) Creating a thread by extending Thread class.
+
+"""
+from threading import *
+class MyThread(Thread):
+    def run(self):
+        for i in range(5):
+            print('Child Thread -1')
+t = MyThread()
+t.start()
+for i in range(5):
+    print('Main Thread-1')
+
+
+class test:
+    def display(self):
+        for i in range(5):
+            print('Child Thread-2')
+obj = test()
+t  = Thread(target = obj.display())
+for i in range(5):
+    print('Main Thread-2')
+
+
+from threading import *
+print(current_thread().getName())
+current_thread().setName('Lohan')
+print('Now the naem has changes to : ',current_thread().getName())
+print(current_thread().name)
+
+
+def display():
+    print('Child Thread : ',current_thread().ident)
+t = Thread(target=display)
+t.start()
+print('Main Thread Identification Number :',current_thread().ident)
+print('Child Thread Identification Number :',t.ident)
+
+
+import time
+def display():
+    print(current_thread().name,'started...!')
+    time.sleep(3)
+    print(current_thread().name,'ended...!')
+print('The number of active threads : ',active_count())
+t1 = Thread(target=display,name = 'Child Thread 1')
+t2 = Thread(target=display,name = 'Child Thread 2')
+t3 = Thread(target=display,name = 'Child Thread 3')
+t1.start()
+t2.start()
+t3.start()
+print('The number of active threads : ',active_count())
+time.sleep(5)
+print('The number of active threads : ',active_count())
+
+
+def display():
+    print(current_thread().name,'started...!')
+    time.sleep(3)
+    print(current_thread().name,'ended...!')
+t1 = Thread(target=display,name = 'Child Thread 1')
+t2 = Thread(target=display,name = 'Child Thread 2')
+t3 = Thread(target=display,name = 'Child Thread 3')
+t1.start()
+t2.start()
+t3.start()
+l = enumerate()
+for t in l:
+    print('Name : ',t.name)
+time.sleep(6)
+print('after 6 seconds sleep...!')
+l = enumerate()
+for t in l:
+    print('Name : ',t.name)
+
+
+def display():
+    print(current_thread().name,'started...!')
+    time.sleep(3)
+    print(current_thread().name,'ended...!')
+t1 = Thread(target=display,name = 'Child Thread 1')
+t2 = Thread(target=display,name = 'Child Thread 2')
+t3 = Thread(target=display,name = 'Child Thread 3')
+t1.start()
+t2.start()
+t3.start()
+print(t1.name,'Is alive : ',t1.is_alive())
+print(t2.name,'Is alive : ',t2.is_alive())
+print(t3.name,'Is alive : ',t3.is_alive())
+time.sleep(6)
+print('after 6 seconds sleep...!')
+print(t1.name,'Is alive : ',t1.is_alive())
+print(t2.name,'Is alive : ',t2.is_alive())
+"""
+
+from threading import *
 
