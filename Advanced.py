@@ -1601,7 +1601,216 @@ time.sleep(6)
 print('after 6 seconds sleep...!')
 print(t1.name,'Is alive : ',t1.is_alive())
 print(t2.name,'Is alive : ',t2.is_alive())
+
+
+
+def display():
+    for i in range(5):
+        print('Child Thread.')
+        time.sleep(1)
+t = Thread(target=display)
+t.start()
+t.join(3)       # Main thread will wait for 3 seconds till child thread is executing and then it will execute itself.
+for i in range(6):
+    print('Main Thread.')  
 """
 
+# daemon Threads ---------------------------->>>
+
+"""
 from threading import *
+def job():
+    print('Child Thread.')
+t = Thread(target=job)
+print(t.isDaemon())  # parent is no daemon so is the child.
+t.setDaemon(True)     # but child nature can be changed.
+print(t.isDaemon())   # Main thread is always non daemon.
+
+
+import time
+def job1():
+    print('Job1 execution...!')
+    print(current_thread().name,'is daemon : ',current_thread().daemon)
+    t2 = Thread(target=job2,name='Child Thread-2')
+    print('t2 is daemon : ',t2.daemon)
+    t2.start()
+def job2():
+    print('Job2 execution...!')
+t = Thread(target=job1,name='Child Thread-1')
+t.setDaemon(True)
+t.start()
+time.sleep(5)
+"""
+
+
+# Synchronization -------------------------------->>
+
+"""
+from threading import *
+import time
+
+def wish(name):
+    for i in range(5):
+        print('Good Morning !',end=' ')
+        time.sleep(1)
+        print(name)
+t1 = Thread(target=wish,args=('Dhoni',))
+t2 = Thread(target=wish,args=('Kohli',))
+                         # two threads are working together.
+t1.start()
+t2.start()
+
+
+import time
+l = Lock()
+def wish(name):
+    l.acquire()
+    for i in range(5):
+        print('Good Morning !',end=' ')
+        time.sleep(1)
+        print(name)
+    l.release()
+
+t1 = Thread(target=wish,args=('Dhoni',))
+t2 = Thread(target=wish,args=('Kohli',))
+                         # two threads are working together.
+t1.start()
+t2.start()
+
+
+l = RLock()
+def factorial(n):
+    l.acquire()
+    if n == 0:
+        result = 1
+    else:
+        result  = n*factorial(n-1)
+    return result
+
+def results(n):
+    print('The factorila of {} is : {}'.format(n,factorial(n)))
+
+t1 = Thread(target=results(5,))
+t2 = Thread(target=results(6,))
+t1.start()
+t2.start()
+l.release()
+
+s = Semaphore(3)
+def wish(name):
+    s.acquire()
+    for i in range(5):
+        print('Good Morning : ',end=' ')
+        time.sleep(1)
+        print(name)
+    s.release()
+t1 = Thread(target=wish,args=('Dhoni',))
+t2 = Thread(target=wish,args=('Kohli',))
+t3 = Thread(target=wish,args=('Raina',))
+t1.start()
+t2.start()
+t3.start()
+"""
+
+# Interthread Communication --------------------------->>
+
+"""
+from threading import *
+import time
+e = Event()
+def Consumer():
+    print('Consumer thread waiting....')
+    e.wait()
+    print('Consumer thread got notification and consuming items...')
+def Producer():
+    time.sleep(5)
+    print('Producer thread producing items...')
+    print('Producer thread giving notification to consumer...')
+    e.set()
+t1 = Thread(target=Producer)
+t2 = Thread(target=Consumer)
+t1.start()
+t2.start()
+
+
+def trafficpolice():
+    while True:
+        time.sleep(5)
+        print('Green Signal...')
+        e.set()
+        time.sleep(10)
+        print('Red Signal...')
+        e.clear()
+def driver():
+    num = 0
+    while True:
+        print('waiting for green Signal...')
+        e.wait()
+        print('Signal is green now....')
+        while e.isSet():
+            num += 1
+            print("Vehicle Number : ",num,'Crossing the signal.')
+            time.sleep(2)
+        print('Signal is Red.....wait here.')
+t1 = Thread(target=trafficpolice)
+t2 = Thread(target=driver)
+t1.start()
+t2.start()
+
+
+def Consume(c):
+    c.acquire()
+    print('Consumer is waiting for updation....')
+    c.wait()
+    print('Consumer got notification to consume...')
+    c.release()
+def Produce(c):
+    c.acquire()
+    print('Producer is producing...')
+    print('He is giving notification...')
+    c.notify()
+    c.release()
+c = Condition()
+t1 = Thread(target=Consume,args=(c,))
+t2 = Thread(target=Produce,args=(c,))
+t1.start()
+t2.start()
+
+
+import random
+items = []
+def produce(c):
+    while True:
+        c.acquire()
+        item = random.randint(1,100)
+        print('Producer is producing items...!')
+        items.append(item)
+        print('Producer giving notification...!')
+        c.notify()
+        c.release()
+        time.sleep(3)
+def consume(c):
+    while True:
+        c.acquire()
+        print('Consumer is wating....!')
+        c.wait()
+        print('Consumer is consuming items..!',items.pop())
+        c.release()
+        time.sleep(3)
+c = Condition()
+t1 = Thread(target=consume,args=(c,))
+t2 = Thread(target=produce,args=(c,))
+t1.start()
+t2.start()
+"""
+
+
+
+# python database programming.
+
+""""""
+
+
+
+
 
