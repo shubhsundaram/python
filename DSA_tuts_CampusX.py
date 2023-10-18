@@ -104,7 +104,7 @@ for i in range(100):
 """
 
 #############  python Dynamic Array   ##################
-
+"""
 import ctypes
 
 class Mylist:
@@ -112,20 +112,36 @@ class Mylist:
     def __init__(self):
         self.size = 1
         self.n = 0
+        #create a C type array with size  = self.size
         self.A = self.__make_array(self.size)
 
     def __len__(self):
         return self.n
     
+    def __str__(self):
+        # [1,2,3]
+        
+
+
     def append(self,item):
         if self.n == self.size:
+            # resize
             self.__resize(self.size*2)
+        # append
         self.A[self.n] = item
         self.n += 1
     
-    def __resize(self,new_cpapcity):
+    def __resize(self,new_capacity):
+        # create a new array with new capacity
         B = self.__make_array(new_capacity)
-        self.size  new_capacity
+        self.size = new_capacity
+        # copy the content from A to B
+        for i in range(self.n):
+            B[i] = self.A[i]
+        # reassign A
+        self.A = B
         
     def __make_array(self,capacity):
+        # this code creates a C type array(static,referencial) with size capacity...
         return (capacity*ctypes.py_object)()
+"""
