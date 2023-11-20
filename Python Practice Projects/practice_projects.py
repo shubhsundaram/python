@@ -1,6 +1,6 @@
-##############  Guess the number using python ###############
+##############  PROJECT-1 : Guess the number using python ###############
+"""
 import random
-
 def guess(x):
     random_no = random.randint(1,x)
     guess = 0
@@ -27,3 +27,30 @@ def guess(x):
         print('Congrats ! You got 3rd prize')
 
 guess(100)
+
+
+##############  PROJECT-2 : Rock Paper Scissor using python ###############
+
+import random
+
+def is_win(player,opponent):
+    if (player == 'r' and opponent == 's') or (player == 's' and opponent == 'p') \
+        or (player == 'p'  and opponent == 'r'):
+        return True
+
+def play():
+    user = input(" choose among the following :\n 'r' for rock\n's' for scissor\n'p' for paper ")
+    computer = random.choice(['r','p','s'])
+
+    if user == computer:
+        return 'Tie match\nHope you enjoyed the Game..!'
+    
+    elif is_win(user,computer):
+        return 'You won..!\nHope you enjoyed the Game..!'
+    
+    else:
+        print(f'You lost..! because computer have choosen {computer}')
+    return 'Hope you enjoyed the Game..!'
+
+print(play())
+"""
