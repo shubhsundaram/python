@@ -1,0 +1,5 @@
+In python you can iterate over a data type with the help of a for loop.
+In python you can obtain a random number of integers over a range of value.
+In python you can read and write to a file.
+In python you can import external modules from pythpn library.
+In python you can append lists and dictionary as well.
