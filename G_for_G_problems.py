@@ -274,6 +274,7 @@ res = [key for key,value in res.items() if value % 2 != 0]
 print('The odd frequency characters are : ',str(res))
 """
 
+
 ''' Specific Characters Frequency in String List
 from collections import Counter
 str1 = "Hello How are You dear...!! "
